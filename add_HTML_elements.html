@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="button">Click to add new list!</button>
+        <ul id="list">Workout Plan
+            <li>Chest Day</li>
+            <li>Back Day</li>
+            <li>Shoulder Day</li>
+            <li>Leg Day</li>
+        </ul>
+    </div>
+
+    <script>
+        let button = document.getElementById('button')
+        let myList = document.getElementById('list')
+        button.addEventListener("click",function(){
+            let newList = document.createElement("li")
+            newList.innerHTML = 'Bicep Tricep Day'
+            //add HTML elements using insertBefore() method
+            // myList.insertBefore(newList,myList.children[3])
+            // myList.insertBefore(newList,null)   //null means add html elements at the last
+
+            //add html elements at the last using appendCild() method
+            myList.appendChild(newList)
+
+            //add html elements to afterbegin, beforebegin, afterend, beforeend
+            myList.insertAdjacentElement("afterend",newList)
+        })
+    </script>
+</body>
+</html>

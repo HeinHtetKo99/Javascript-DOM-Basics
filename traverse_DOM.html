@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 id="header">DOM BASIC COURSE</h1>
+        <p id="paragraph">this is next element sibling of h1</p>
+    </div>
+
+    <script>
+        //Childnodes
+        let container = document.getElementsByClassName('container')[0]
+        console.log(container.childNodes[1])
+
+        //NextElementSibling
+        let header = document.getElementById('header')
+        console.log(header.nextElementSibling)
+
+        //PreviousElementSibling
+        let paragraph = document.getElementById('paragraph')
+        console.log(paragraph.previousElementSibling)
+    </script>
+</body>
+</html>

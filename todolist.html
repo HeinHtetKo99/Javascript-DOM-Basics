@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>To‑Do List — Simple Design</title>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --card: #fff;
+            --accent: #2563eb;
+            --muted: #6b7280;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Segoe UI, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background-image: url('https://images.pexels.com/photos/2736499/pexels-photo-2736499.jpeg');
+            background-size: 2000px;
+        }
+
+        s .container {
+            width: 100%;
+            max-width: 640px;
+            background: var(--card);
+            border-radius: 8px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px
+        }
+
+        h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #0f172a
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .add-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px
+        }
+
+        .add-row input {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e6e6e6;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        #btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .todo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            background: #fff;
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title {
+            font-size: 15px;
+            color: #0b1220;
+            margin-bottom: 4px
+        }
+
+        .meta {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 6px 8px;
+            border-radius: 6px;
+        }
+
+        .action-btn:hover {
+            background: #f3f4f6;
+            color: #111827
+        }
+
+        .action-btn.delete {
+            color: var(--danger)
+        }
+
+        .action-btn.complete {
+            color: var(--success)
+        }
+
+        .title.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container bg">
+        <header>
+            <div>
+                <h1>My To-Do List</h1>
+                <p class="lead">Simple design — add, complete, edit, delete (sample items)</p>
+            </div>
+            <div class="small" style="color:var(--muted);font-size:12px"></div>
+        </header>
+
+        <div class="add-row">
+            <input id="todo-input" placeholder="Add a new task - e.g. 'Plan weekend trip'">
+            <button id="btn">Add</button>
+        </div>
+
+        <ul class="list">
+            <!-- <li class="todo">
+                <div class="left">
+                    <div class="title" id="loopText">Call Alex about meeting</div>
+                </div>
+                <div class="actions">
+                    <button class="action-btn complete">Complete</button>
+                    <button class="action-btn">Edit</button>
+                    <button class="action-btn delete">Delete</button>
+                </div>
+            </li> -->
+        </ul>
+    </main>
+    <script>
+        let todos = [];
+        let todoInput = document.getElementById('todo-input')
+        let todoBtn = document.getElementById('btn')
+        let ul = document.getElementsByClassName('list')[0]
+        todoBtn.addEventListener("click", function () {
+            let todo = {
+                text: todoInput.value,
+                isCompleted: false
+            }
+            if (todo.text.trim() !== "") {
+                todos.push(todo)
+                renderTodos()
+                todoInput.value = ""
+                todoInput.focus()
+            } else {
+                alert('please enter some text!')
+            }
+        })
+
+        function renderTodos() {
+            ul.innerHTML = "";
+            for (let i = 0; i < todos.length; i++) {
+                let li = document.createElement("li")
+                li.className = "todo"
+                let div1 = document.createElement("div")
+                div1.className = "left"
+                let div2 = document.createElement("div")
+                div2.className = "title"
+                div2.innerText = todos[i].text
+                if(todos[i].isCompleted){
+                    div2.classList.add("completed")
+                }
+                let div3 = document.createElement("div")
+                div3.className = "actions"
+                let button1 = document.createElement("button")
+                button1.className = "action-btn complete"
+                button1.addEventListener("click", function () {
+                    todos[i].isCompleted = !todos[i].isCompleted
+                    renderTodos()
+                })
+                button1.innerText = todos[i].isCompleted ? "uncomplete" : "complete"
+                let button2 = document.createElement("button")
+                button2.className = "action-btn"
+                button2.innerText = "Edit"
+                button2.addEventListener("click", function () {
+                    let newText = prompt("Edit your text!", todos[i].text)
+                    todos[i].text = newText
+                    renderTodos()
+                })
+                let button3 = document.createElement("button")
+                button3.className = "action-btn delete"
+                button3.innerText = "Delete"
+                button3.addEventListener("click", function () {
+                    todos.splice(i, 1)
+                    renderTodos()
+                })
+                ul.appendChild(li)
+                li.appendChild(div1)
+                div1.appendChild(div2)
+                li.appendChild(div3)
+                div3.appendChild(button1)
+                div3.appendChild(button2)
+                div3.appendChild(button3)
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.4/dist/sweetalert2.all.min.js"></script>
+</body>
+
+</html>

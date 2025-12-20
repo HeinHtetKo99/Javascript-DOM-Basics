@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title">Hello, World!
+    </h1>
+    <ul id="list">
+        <li class="items">
+            This is a list item.
+        </li>
+        <li class="items">
+            This is another list item.
+        </li>
+        <li class="items">
+            This is a third list item.
+        </li>
+        <li class="items">
+            This is a fourth list item.
+        </li>
+    </ul>
+
+
+    <script>
+        //innerHTML
+        let title = document.getElementById("title");
+        title.textContent += " - Updated via JavaScript";
+        let items = document.getElementById("list")
+        console.log(items.innerHTML)
+        items.innerHTML = "<p>this is new </p>"
+        let itemsArray = Array.from(items);
+        itemsArray.forEach(item => {
+            console.log(item)
+        });
+    </script>
+</body>
+
+</html>

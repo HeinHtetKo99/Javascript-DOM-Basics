@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="title">Hello This Is Testing!</h1>
+    <div class="blog">
+        <h1>header1</h1>
+        <p>paragraph</p>
+        <span>this is span text</span>
+    </div>
+
+    <script>
+        let title = document.getElementById('title')
+        let clonetitle = title.cloneNode(true)
+        console.log(clonetitle)
+
+        let blog = document.getElementsByClassName('blog')[0]
+        let cloneblog = blog.cloneNode(true)
+        console.log(cloneblog)
+    </script>
+</body>
+</html>
